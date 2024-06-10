@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "safeguard"
-version = "0.0.0"
+version = "0.1.0"
 description = "Railway Oriented Programming Library"
 authors = ["Demetre Dzmanashvili <demetredzmanashvili@gmail.com>"]
 readme = "README.md"
@@ -43,13 +43,14 @@ lazydocs = "^0.4.8"
 
 [tool.pytest.ini_options]
 addopts = [
+    "--doctest-modules",
     "--tb=short",
     "--cov=src",
     "--cov-report=term",
     "--cov-report=term-missing",
     "--cov-report=xml",
     # By default, ignore tests that only run on Python 3.10+
-#    "--ignore=tests/test_pattern_matching.py",
+    #    "--ignore=tests/test_pattern_matching.py",
 ]
 testpaths = [
     "tests",
@@ -64,7 +65,7 @@ cache_dir = ".mypy_cache/strict"
 
 files = [
     "src",
-#    "tests",
+    #    "tests",
 ]
 # Exclude files with pattern matching syntax until we drop support for Python
 # versions that don't support pattern matching. Trying to use with an older

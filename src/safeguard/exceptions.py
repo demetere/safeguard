@@ -20,3 +20,34 @@ class UnwrapFailedError(Exception):
         super().__init__(message)
         self.halted_container = container
 
+
+class IncorrectCallableException(Exception):
+    """Raised when a callable is not a function or a method."""
+
+    def __init__(self, function_name: str, expected: str, got: str) -> None:
+        origin_function = function_name.replace("async_", "")
+        recommended_function = f"{got}_{origin_function}" if got == "async" else origin_function
+        super().__init__(
+            "Function '{0}' expected to get a {1} function, but got a {2} function. (maybe call {3})".format(
+                function_name,
+                expected,
+                got,
+                recommended_function
+            ),
+        )
+
+
+class IncorrectActionCalledException(Exception):
+    """Raised when an action is not a function or a method."""
+
+    def __init__(self, action_name: str, expected: str, got: str) -> None:
+        origin_function = action_name.replace("async_", "")
+        recommended_function = f"{got}_{origin_function}" if got == "async" else origin_function
+        super().__init__(
+            "Action '{0}' is expecting {1} chain, instead got {2} chain. (maybe call {3})".format(
+                action_name,
+                expected,
+                got,
+                recommended_function
+            ),
+        )
